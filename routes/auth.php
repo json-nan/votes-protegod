@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\TwitchAuthController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+
+Route::prefix('oauth')->group(function () {
+    Route::get('twitch', [TwitchAuthController::class, 'redirect'])->name('oauth.twitch');
+    Route::get('twitch/callback', [TwitchAuthController::class, 'callback'])->name('oauth.twitch.callback');
+});
 
 Route::middleware('guest')->group(function () {
     Volt::route('register', 'pages.auth.register')

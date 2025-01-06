@@ -30,7 +30,7 @@
                         </p>
                     </div>
                     <div class="flex flex-col items-center justify-center mt-4">
-                        <a href="https://www.twitch.tv/protegod"
+                        <a href="{{ route('oauth.twitch') }}"
                             class="mt-2 text-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-4">
                             <span class="text-2xl font-bold">Continúa con Twitch</span>
                             <img src="{{ asset('assets/glitch_flat_purple.svg') }}" alt="Logo" class="w-8">
