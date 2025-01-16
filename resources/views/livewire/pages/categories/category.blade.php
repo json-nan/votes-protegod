@@ -72,7 +72,7 @@ $vote = function (Option $option) {
                     @if($option->content_type == ContentType::TWITCH_CLIP)
                     <div class="w-full aspect-video">
                         <iframe
-                            src="{{ "https://clips.twitch.tv/embed?clip=" . Str::of($option->content)->explode('/')->last()  . "&parent=votation-prote.test,votacion-anual.protegod.com" }}"
+                            src="{{ "https://clips.twitch.tv/embed?clip=" . Str::of($option->content)->explode('/')->last()  . "&parent=votacion-anual.protegod.com" }}"
                             height="100%"
                             width="100%"
                             allowfullscreen>
