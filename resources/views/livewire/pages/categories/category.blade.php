@@ -26,6 +26,8 @@ mount(function (Category $category) {
 });
 
 $vote = function (Option $option) {
+    $this->toast()->info('Aún no se encuentran habilitadas las votaciones')->send();
+    return;
     if ($this->voted?->status === VoteStatus::CONFIRMED) {
         $this->toast()->error('Ya has confirmado tu voto en esta categoría')->send();
         return;
