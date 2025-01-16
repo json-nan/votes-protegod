@@ -19,6 +19,15 @@ class User extends Authenticatable implements FilamentUser
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function (User $user) {
+            $user->type = UserType::USER;
+        });
+    }
     /**
      * The attributes that are mass assignable.
      *

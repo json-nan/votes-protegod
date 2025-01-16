@@ -24,7 +24,6 @@ class TwitchAuthController extends Controller
         ], [
             'name' => $twitchUser->name,
             'avatar' => $twitchUser->avatar,
-            'type' => UserType::USER,
         ]);
 
         Auth::login($user);
