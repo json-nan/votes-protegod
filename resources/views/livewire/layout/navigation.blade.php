@@ -29,39 +29,39 @@ $logout = function (Logout $logout) {
                 @if (auth()->user()->type === UserType::ADMIN)
                 <a href="/admin" class="text-white bg-[#5c149f] px-3 py-2 rounded-md mr-2">
                     Panel de administración
-                    </button>
-                    @endif
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="gap-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#5c149f] hover:text-gray-100 focus:outline-none transition ease-in-out duration-150">
-                                <img src="{{ auth()->user()->avatar }}" alt="{{ auth()->user()->name }}"
-                                    class="size-8 rounded-full" />
-                                <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
-                                    x-on:profile-updated.window="name = $event.detail.name"
-                                    class="">
-                                </div>
+                </a>
+                @endif
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button
+                            class="gap-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-[#5c149f] hover:text-gray-100 focus:outline-none transition ease-in-out duration-150">
+                            <img src="{{ auth()->user()->avatar }}" alt="{{ auth()->user()->name }}"
+                                class="size-8 rounded-full" />
+                            <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                                x-on:profile-updated.window="name = $event.detail.name"
+                                class="">
+                            </div>
 
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
+                            <div class="ms-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
 
-                        <x-slot name="content">
-                            <!-- Authentication -->
-                            <button wire:click="logout" class="w-full text-start">
-                                <x-dropdown-link>
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </button>
-                        </x-slot>
-                    </x-dropdown>
+                    <x-slot name="content">
+                        <!-- Authentication -->
+                        <button wire:click="logout" class="w-full text-start">
+                            <x-dropdown-link>
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </button>
+                    </x-slot>
+                </x-dropdown>
             </div>
 
             <!-- Hamburger -->
