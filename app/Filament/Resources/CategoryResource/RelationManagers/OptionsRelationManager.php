@@ -31,6 +31,7 @@ class OptionsRelationManager extends RelationManager
                         'text' => 'Texto',
                         'image' => 'Imagen',
                         'twitch-clip' => 'Twitch Clip',
+                        'youtube-video' => 'Youtube Video',
                     ])
                     ->required()
                     ->live()
