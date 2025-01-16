@@ -6,5 +6,6 @@ enum ContentType: string
 {
     case TEXT = 'text';
     case IMAGE = 'image';
-    case VIDEO = 'video';
-} 
+    case TWITCH_CLIP = 'twitch-clip';
+    case YOUTUBE_VIDEO = 'youtube-video';
+}

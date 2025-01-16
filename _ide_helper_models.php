@@ -70,6 +70,8 @@ namespace App\Models{
 /**
  * 
  *
+ * @mixin \Eloquent
+ * @mixin \Illuminate\Database\Eloquent\Builder
  * @property int $id
  * @property string $name
  * @property string $email
@@ -97,7 +99,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Filament\Models\Contracts\FilamentUser {}
 }
 
 namespace App\Models{
@@ -109,6 +111,7 @@ namespace App\Models{
  * @property int $option_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \App\Enums\VoteStatus $status
  * @property-read \App\Models\Option $option
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote newModelQuery()
@@ -117,6 +120,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote whereOptionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Vote whereUserId($value)
  */

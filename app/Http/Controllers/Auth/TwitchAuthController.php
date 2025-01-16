@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,11 @@ class TwitchAuthController extends Controller
         ], [
             'name' => $twitchUser->name,
             'avatar' => $twitchUser->avatar,
+            'type' => UserType::USER,
         ]);
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
 }
