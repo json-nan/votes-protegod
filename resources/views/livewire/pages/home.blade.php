@@ -5,7 +5,7 @@ use App\Models\Category;
 use function Livewire\Volt\{state, layout};
 
 layout('layouts.app');
-state(['categories' => fn() => Category::with('options')->get()]);
+state(['categories' => fn() => Category::with('options')->active()->get()]);
 
 ?>
 
