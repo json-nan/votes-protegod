@@ -58,50 +58,60 @@ $vote = function (Option $option) {
             </div>
             <div class="flex items-center gap-4">
                 @if($previous_category)
-                <a href="{{ route('category', $previous_category) }}" class="text-center bg-[#5c149f] px-4 py-2 rounded-sm w-fit hover:bg-[#7b2ac8] transition-all duration-300 text-[#f2f2f2]">Categoría anterior</a>
+                    <a href="{{ route('category', $previous_category) }}"
+                       class="text-center bg-[#5c149f] px-4 py-2 rounded-sm w-fit hover:bg-[#7b2ac8] transition-all duration-300 text-[#f2f2f2]">Categoría
+                        anterior</a>
                 @endif
                 @if($next_category)
-                <a href="{{ route('category', $next_category) }}" class="text-center bg-[#5c149f] px-4 py-2 rounded-sm w-fit hover:bg-[#7b2ac8] transition-all duration-300 text-[#f2f2f2]">Siguiente categoría</a>
+                    <a href="{{ route('category', $next_category) }}"
+                       class="text-center bg-[#5c149f] px-4 py-2 rounded-sm w-fit hover:bg-[#7b2ac8] transition-all duration-300 text-[#f2f2f2]">Siguiente
+                        categoría</a>
                 @else
-                <a href="{{ route('summary') }}" class="text-center bg-green-600 px-4 py-2 rounded-sm w-fit hover:bg-green-700 transition-all duration-300 text-[#f2f2f2]">Ir a resumen</a>
+                    <a href="{{ route('summary') }}"
+                       class="text-center bg-green-600 px-4 py-2 rounded-sm w-fit hover:bg-green-700 transition-all duration-300 text-[#f2f2f2]">Ir
+                        a resumen</a>
                 @endif
             </div>
         </div>
         <div class="grid grid-cols-4 gap-4">
             @foreach ($category->options as $option)
-            <div>
-                <div class="w-full h-full p-4 bg-[#1a1224] rounded-md space-y-2">
-                    @if($option->content_type == ContentType::TWITCH_CLIP)
-                    <div class="w-full aspect-video">
-                        <iframe
-                            src="{{ "https://clips.twitch.tv/embed?clip=" . Str::of($option->content)->explode('/')->last()  . "&parent=votacion-anual.protegod.com" }}"
-                            height="100%"
-                            width="100%"
-                            allowfullscreen>
-                        </iframe>
+                <div>
+                    <div class="w-full h-full p-4 bg-[#1a1224] rounded-md space-y-2">
+                        @if($option->content_type == ContentType::TWITCH_CLIP)
+                            <div class="w-full aspect-video">
+                                <iframe
+                                    src="{{ "https://clips.twitch.tv/embed?clip=" . Str::of($option->content)->explode('/')->last()  . "&parent=votacion-anual.protegod.com" }}"
+                                    height="100%"
+                                    width="100%"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        @elseif($option->content_type == ContentType::YOUTUBE_VIDEO)
+                            <div class="w-full aspect-video">
+                                <iframe
+                                    src="{{ "https://www.youtube.com/embed/" . Str::of($option->content)->explode('v=')->last() }}"
+                                    height="100%"
+                                    width="100%"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        @elseif($option->content_type == ContentType::IMAGE)
+                            <div class="w-full aspect-video">
+                                <img src="{{ Storage::url($option->content) }}" alt="{{ $option->title }}"
+                                     class="w-full h-full object-contain">
+                            </div>
+                        @elseif($option->content_type == ContentType::TEXT)
+                            <div class="w-full aspect-video flex items-center justify-center">
+                                <p class="text-center text-[#f2f2f2] font-bold text-lg">{{ $option->content }}</p>
+                            </div>
+                        @endif
+                        <p class="text-center flex-1 text-[#f2f2f2] font-bold text-lg">{{ $option->title }}</p>
+                        <button wire:click="vote({{ $option->id }})"
+                                class=" {{ $option->id == $option_selected ? 'bg-[#17a589]' : 'bg-[#5c149f]' }} px-4 py-2 rounded-sm w-full hover:bg-[#7b2ac8] transition-all duration-300 text-[#f2f2f2]">
+                            Votar
+                        </button>
                     </div>
-                    @elseif($option->content_type == ContentType::YOUTUBE_VIDEO)
-                    <div class="w-full aspect-video">
-                        <iframe
-                            src="{{ "https://www.youtube.com/embed/" . Str::of($option->content)->explode('v=')->last() }}"
-                            height="100%"
-                            width="100%"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    @elseif($option->content_type == ContentType::IMAGE)
-                    <div class="w-full aspect-video">
-                        <img src="{{ Storage::url($option->content) }}" alt="{{ $option->title }}" class="w-full h-full object-contain">
-                    </div>
-                    @elseif($option->content_type == ContentType::TEXT)
-                    <div class="w-full aspect-video flex items-center justify-center">
-                        <p class="text-center text-[#f2f2f2] font-bold text-lg">{{ $option->content }}</p>
-                    </div>
-                    @endif
-                    <p class="text-center flex-1 text-[#f2f2f2] font-bold text-lg">{{ $option->title }}</p>
-                    <button wire:click="vote({{ $option->id }})" class=" {{ $option->id == $option_selected ? 'bg-[#17a589]' : 'bg-[#5c149f]' }} px-4 py-2 rounded-sm w-full hover:bg-[#7b2ac8] transition-all duration-300 text-[#f2f2f2]">Votar</button>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>

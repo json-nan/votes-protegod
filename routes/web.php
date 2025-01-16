@@ -18,4 +18,4 @@ Route::middleware('auth')->group(function () {
     Volt::route('/summary', 'pages.categories.summary')->name('summary');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

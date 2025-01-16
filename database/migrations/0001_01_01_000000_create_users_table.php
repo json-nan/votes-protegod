@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\UserType;
 
 return new class extends Migration
 {

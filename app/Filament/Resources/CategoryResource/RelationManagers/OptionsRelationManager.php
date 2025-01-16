@@ -12,8 +12,6 @@ use Filament\Forms\Set;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OptionsRelationManager extends RelationManager
 {
@@ -35,9 +33,9 @@ class OptionsRelationManager extends RelationManager
                     ])
                     ->required()
                     ->live()
-                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('content', null)),
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('content', null)),
 
-                Grid::make(1)->schema(fn(Get $get): array => match ($get('content_type')) {
+                Grid::make(1)->schema(fn (Get $get): array => match ($get('content_type')) {
                     'text' => [
                         TextInput::make('content')
                             ->required()
@@ -60,7 +58,7 @@ class OptionsRelationManager extends RelationManager
                     ],
                     default => [],
                 })
-                    ->key('content')
+                    ->key('content'),
             ]);
     }
 
