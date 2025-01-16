@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Enums\UserType;
 
 $logout = function (Logout $logout) {
     $logout();
@@ -25,6 +26,11 @@ $logout = function (Logout $logout) {
             </div>
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @if (auth()->user()->type === UserType::ADMIN)
+                <button class="text-white bg-[#5c149f] px-3 py-2 rounded-md mr-2">
+                    Panel de administración
+                </button>
+                @endif
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
