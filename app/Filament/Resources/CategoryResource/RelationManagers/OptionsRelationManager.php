@@ -53,6 +53,11 @@ class OptionsRelationManager extends RelationManager
                             ->required()
                             ->maxLength(255),
                     ],
+                    'youtube-video' => [
+                        TextInput::make('content')
+                            ->required()
+                            ->maxLength(255),
+                    ],
                     default => [],
                 })
                     ->key('content')
