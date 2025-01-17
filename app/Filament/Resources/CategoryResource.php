@@ -58,7 +58,9 @@ class CategoryResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('order', 'asc')
+            ->reorderable('order');
     }
 
     public static function getRelations(): array
