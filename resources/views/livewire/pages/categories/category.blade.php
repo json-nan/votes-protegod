@@ -9,15 +9,28 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use function Livewire\Volt\{layout, mount, state, uses};
 use TallStackUi\Traits\Interactions;
+use Illuminate\Support\Facades\Cache;
 
 uses([Interactions::class]);
 
 layout('layouts.app');
 
-state(['category', 'option_selected' => null, 'next_category' => null, 'previous_category' => null, 'voted' => null]);
+state([
+    'category',
+    'options' => [],
+    'option_selected' => null,
+    'next_category' => null,
+    'previous_category' => null,
+    'voted' => null
+]);
 
 mount(function (Category $category) {
-    $categories = Category::pluck('id');
+    $categories = Cache::remember('categories-ids', 86400, function () {
+        return Category::pluck('id');
+    });
+    $this->options = Cache::remember("category-$category->id-options", 86400, function () {
+        return $category->options;
+    });
     $this->voted = Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->category->options->pluck('id'))->first();
     $this->category = $category->load('options');
     $this->option_selected = $this->voted?->option_id;
@@ -28,6 +41,7 @@ mount(function (Category $category) {
 $vote = function (Option $option) {
     $this->toast()->info('Aún no se encuentran habilitadas las votaciones')->send();
     return;
+
     if ($this->voted?->status === VoteStatus::CONFIRMED) {
         $this->toast()->error('Ya has confirmado tu voto en esta categoría')->send();
         return;
@@ -74,7 +88,7 @@ $vote = function (Option $option) {
             </div>
         </div>
         <div class="grid grid-cols-4 gap-4">
-            @foreach ($category->options as $option)
+            @foreach ($options as $option)
                 <div>
                     <div class="w-full h-full p-4 bg-[#1a1224] rounded-md space-y-2">
                         @if($option->content_type == ContentType::TWITCH_CLIP)
