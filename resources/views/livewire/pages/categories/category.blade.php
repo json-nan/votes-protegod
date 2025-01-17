@@ -32,7 +32,6 @@ mount(function (Category $category) {
         return $category->options;
     });
     $this->voted = Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->category->options->pluck('id'))->first();
-    $this->category = $category->load('options');
     $this->option_selected = $this->voted?->option_id;
     $this->next_category = $categories->after($this->category->id);
     $this->previous_category = $categories->before($this->category->id);
