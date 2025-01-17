@@ -28,7 +28,7 @@ mount(function (Category $category) {
     $categories = Cache::remember('categories-ids', 86400, function () {
         return Category::pluck('id');
     });
-    $this->options = Cache::remember("category-$category->id-options", 86400, function () {
+    $this->options = Cache::remember("category-$category->id-options", 86400, function () use ($category) {
         return $category->options;
     });
     $this->voted = Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->options->pluck('id'))->first();
