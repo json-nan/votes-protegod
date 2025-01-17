@@ -31,7 +31,7 @@ mount(function (Category $category) {
     $this->options = Cache::remember("category-$category->id-options", 86400, function () {
         return $category->options;
     });
-    $this->voted = Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->category->options->pluck('id'))->first();
+    $this->voted = Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->options->pluck('id'))->first();
     $this->option_selected = $this->voted?->option_id;
     $this->next_category = $categories->after($this->category->id);
     $this->previous_category = $categories->before($this->category->id);
@@ -47,7 +47,7 @@ $vote = function (Option $option) {
     }
 
     if ($this->option_selected) {
-        Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->category->options->pluck('id'))->delete();
+        Vote::where('user_id', auth()->user()->id)->whereIn('option_id', $this->options->pluck('id'))->delete();
     }
 
     $this->voted = Vote::create([
