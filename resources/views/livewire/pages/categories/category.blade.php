@@ -64,7 +64,7 @@ $vote = function (Option $option) {
 
 <div class="mt-10 px-4 sm:px-6 lg:px-8 pb-10">
     <div class="container mx-auto space-y-8">
-        <div class="flex">
+        <div class="flex flex-col lg:flex-row">
             <div class="flex-1">
                 <h1 class="text-3xl font-bold text-[#f2f2f2]">{{ $category->name }}</h1>
                 <p class="text-[#c8c8c8] text-lg">{{ $category->description }}</p>
@@ -86,7 +86,7 @@ $vote = function (Option $option) {
                 @endif
             </div>
         </div>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
             @foreach ($options as $option)
                 <div>
                     <div class="w-full h-full p-4 bg-[#1a1224] rounded-md space-y-2">
