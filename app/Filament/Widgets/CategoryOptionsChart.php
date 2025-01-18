@@ -22,6 +22,19 @@ class CategoryOptionsChart extends ChartWidget
                 [
                     'label' => 'Votes',
                     'data' => $this->category->options->pluck('votes')->map(fn ($votes) => $votes->count())->toArray(),
+                    'backgroundColor' => [
+                        //                        up to 10 different colors
+                        '#4B0082',
+                        '#8A2BE2',
+                        '#C71585',
+                        '#9400D3',
+                        '#FF00FF',
+                        '#00FFFF',
+                        '#39FF14',
+                        '#FFC107',
+                        '#FF4500',
+                        '#2F4F4F',
+                    ],
                 ],
             ],
         ];
