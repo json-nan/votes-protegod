@@ -26,7 +26,7 @@ state([
 
 mount(function (Category $category) {
     $categories = Cache::remember('categories-ids', 86400, function () {
-        return Category::pluck('id');
+        return Category::orderBy('order')->pluck('id');
     });
     $this->options = Cache::remember("category-$category->id-options", 86400, function () use ($category) {
         return $category->options;
