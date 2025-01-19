@@ -39,6 +39,9 @@ mount(function (Category $category) {
 
 $vote = function (Option $option) {
 
+    $this->toast()->info('Las votaciones han cerrado')->send();
+    return;
+
     if ($this->voted?->status === VoteStatus::CONFIRMED) {
         $this->toast()->error('Ya has confirmado tu voto en esta categoría')->send();
         return;
