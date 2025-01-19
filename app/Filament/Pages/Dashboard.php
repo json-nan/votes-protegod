@@ -22,7 +22,7 @@ class Dashboard extends \Filament\Pages\Dashboard
         })->toArray();
 
         return [
-            VotesChart::class,
+            //            VotesChart::class,
             ...$categoryCharts,
         ];
     }

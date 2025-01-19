@@ -9,6 +9,8 @@ class CategoryOptionsChart extends ChartWidget
 {
     public Category $category;
 
+    protected int|string|array $columnSpan = 3;
+
     public function getHeading(): string
     {
         return $this->category->name;
@@ -43,5 +45,10 @@ class CategoryOptionsChart extends ChartWidget
     protected function getType(): string
     {
         return 'polarArea';
+    }
+
+    protected function getMaxHeight(): ?string
+    {
+        return '450px';
     }
 }
