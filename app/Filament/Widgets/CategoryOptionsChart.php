@@ -9,7 +9,7 @@ class CategoryOptionsChart extends ChartWidget
 {
     public Category $category;
 
-    protected int|string|array $columnSpan = 3;
+    protected int|string|array $columnSpan = 1;
 
     public function getHeading(): string
     {
